@@ -9,9 +9,11 @@ export default (unnormalizedColumns: $ReadOnlyArray<UnnormalizedColumnType>): $R
   const normalizedColumns = unnormalizedColumns.map((column) => {
     const valueIsNullable = column.isNullable === 'YES';
 
+    const databaseType = column.dataType === 'USER-DEFINED' ? 'udt_' + column.udtName : column.dataType
+
     return {
+      databaseType,
       columnName: column.columnName,
-      databaseType: column.dataType,
       nullable: valueIsNullable,
       tableName: column.tableName
     };

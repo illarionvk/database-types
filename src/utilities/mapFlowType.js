@@ -11,7 +11,11 @@ export default (databaseTypeName: string): string => {
     return 'Object';
   }
 
-  if (/^(?:text|character|timestamp|coordinates)(\s|$)/.test(databaseTypeName)) {
+  if (databaseTypeName === 'udt_citext') {
+    return 'string';
+  }
+
+  if (/^(?:text|character|timestamp|coordinates|uuid)(\s|$)/.test(databaseTypeName)) {
     return 'string';
   }
 

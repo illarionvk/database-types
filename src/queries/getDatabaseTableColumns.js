@@ -14,7 +14,8 @@ export default async (connection: DatabaseConnectionType): Promise<$ReadOnlyArra
       table_name "tableName",
       column_name "columnName",
       is_nullable "isNullable",
-      data_type "dataType"
+      data_type "dataType",
+      udt_name "udtName"
     FROM information_schema.columns
     WHERE table_schema = 'public'
   `);
