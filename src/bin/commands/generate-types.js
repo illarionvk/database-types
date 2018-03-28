@@ -73,7 +73,7 @@ type FormatterType = (name: string) => string;
 
 export const handler = async (argv: ConfigurationType): Promise<void> => {
   const defaultFormatTypeName = (tableName: string): string => {
-    return upperFirst(camelCase(tableName)) + 'RecordType';
+    return upperFirst(camelCase(tableName)) + 'Record';
   };
 
   const defaultFormatPropertyName = (columnName: string): string => {
