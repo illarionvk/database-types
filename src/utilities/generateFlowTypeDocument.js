@@ -14,7 +14,7 @@ const generateFlowTypeDeclarationBody = (properties: $ReadOnlyArray<TypeProperty
   const propertyDeclarations = [];
 
   for (const column of sortedProperties) {
-    propertyDeclarations.push('+' + column.name + ': ' + column.type);
+    propertyDeclarations.push(column.name + ': ' + column.type);
   }
 
   return propertyDeclarations.join('\n');
