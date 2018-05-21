@@ -19,6 +19,7 @@ exports.default = (() => {
       udt_name "udtName"
     FROM information_schema.columns
     WHERE table_schema = 'public'
+    ORDER BY table_name
   `);
   });
 
