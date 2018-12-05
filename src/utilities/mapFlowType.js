@@ -27,6 +27,10 @@ export default (databaseTypeName: string): string => {
     return 'number';
   }
 
+  if (databaseTypeName === 'numeric') {
+    return 'number';
+  }
+
   debug('unknown type', databaseTypeName);
 
   return 'any';

@@ -11,6 +11,7 @@ const knownTypes = {
   integer: 'number',
   json: '{||}',
   jsonb: '{||}',
+  numeric: 'number',
   text: 'string',
   timestamp: 'string'
 };
