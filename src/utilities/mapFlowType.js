@@ -33,5 +33,5 @@ export default (databaseTypeName: string): string => {
 
   debug('unknown type', databaseTypeName);
 
-  return 'any';
+  return '*';
 };
