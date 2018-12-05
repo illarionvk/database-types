@@ -7,8 +7,8 @@ import {
 const debug = createDebug('mapFlowType');
 
 export default (databaseTypeName: string): string => {
-  if (databaseTypeName === 'json') {
-    return 'Object';
+  if (databaseTypeName === 'json' || databaseTypeName === 'jsonb') {
+    return '{||}';
   }
 
   if (databaseTypeName === 'udt_citext') {

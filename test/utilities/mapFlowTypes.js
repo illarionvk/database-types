@@ -9,7 +9,8 @@ const knownTypes = {
   character: 'string',
   coordinates: 'string',
   integer: 'number',
-  json: 'Object',
+  json: '{||}',
+  jsonb: '{||}',
   text: 'string',
   timestamp: 'string'
 };
