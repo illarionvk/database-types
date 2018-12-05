@@ -1,5 +1,9 @@
 // @flow
 
+import type {
+  ColumnType
+} from '../types';
+
 import {
   createDebug
 } from '../factories';
@@ -8,7 +12,7 @@ const debug = createDebug('mapFlowType');
 
 export default (
   databaseTypeName: string,
-  values: string | null | void
+  values: $PropertyType<ColumnType, 'values'> | void
 ): string => {
 
   if (values != null) {

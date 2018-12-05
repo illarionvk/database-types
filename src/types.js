@@ -17,7 +17,7 @@ export type ColumnType = {|
   +databaseType: string,
   +nullable: boolean,
   +tableName: string,
-  +values: string | null,
+  +values: $PropertyType<EnumType, 'values'> | null,
   +description: string | null
 |};
 
