@@ -28,4 +28,8 @@ test('correctly maps known types', (t) => {
 
     t.true(mapFlowType(databaseTypeName) === flowType, flowType);
   }
+
+  t.true(mapFlowType('udt_enum_test', 'pass | fail') === 'pass | fail', 'udt_enum_test');
+
+  t.true(mapFlowType('udt_unknown') === '*', 'udt_unknown');
 });

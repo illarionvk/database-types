@@ -6,7 +6,15 @@ import {
 
 const debug = createDebug('mapFlowType');
 
-export default (databaseTypeName: string): string => {
+export default (
+  databaseTypeName: string,
+  values: string | null | void
+): string => {
+
+  if (values != null) {
+    return values.toString();
+  }
+
   if (databaseTypeName === 'json' || databaseTypeName === 'jsonb') {
     return '{||}';
   }

@@ -15,7 +15,8 @@ import type {
 } from '../../types';
 import {
   getDatabaseTableColumns,
-  getDatabaseMaterializedViewColumns
+  getDatabaseMaterializedViewColumns,
+  getUserDefinedEnums
 } from '../../queries';
 import {
   generateFlowTypeDocument,
@@ -101,7 +102,7 @@ export const handler = async (argv: ConfigurationType): Promise<void> => {
     return filteredColumns.map((column) => {
       return {
         name: formatPropertyName(column.columnName),
-        type: mapFlowType(column.databaseType) + (column.nullable ? ' | null' : ''),
+        type: mapFlowType(column.databaseType, column.values) + (column.nullable ? ' | null' : ''),
         typeName: formatTypeName(column.tableName)
       };
     });
@@ -117,7 +118,9 @@ export const handler = async (argv: ConfigurationType): Promise<void> => {
     unnormalizedColumns = unnormalizedColumns.concat(await getDatabaseMaterializedViewColumns(connection));
   }
 
-  const normalizedColumns = normalizeColumns(unnormalizedColumns);
+  const userDefinedEnums = await getUserDefinedEnums(connection);
+
+  const normalizedColumns = normalizeColumns(unnormalizedColumns, userDefinedEnums);
 
   const properties = createProperties(normalizedColumns);
 

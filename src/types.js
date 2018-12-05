@@ -8,14 +8,17 @@ export type UnnormalizedColumnType = {|
   +columnName: string,
   +dataType: string,
   +isNullable: 'YES' | 'NO',
-  +tableName: string
+  +tableName: string,
+  +udtName: string
 |};
 
 export type ColumnType = {|
   +columnName: string,
   +databaseType: string,
   +nullable: boolean,
-  +tableName: string
+  +tableName: string,
+  +values: string | null,
+  +description: string | null
 |};
 
 export type TypePropertyType = {|
@@ -23,3 +26,9 @@ export type TypePropertyType = {|
   +type: string,
   +typeName: string
 |};
+
+export type EnumType = {|
+  name: string,
+  values: string,
+  description: string | null
+|}
