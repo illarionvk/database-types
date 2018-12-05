@@ -81,7 +81,7 @@ const handler = exports.handler = (() => {
       return filteredColumns.map(function (column) {
         return {
           name: formatPropertyName(column.columnName),
-          type: (0, _utilities.mapFlowType)(column.databaseType) + (column.nullable ? ' | null' : ''),
+          type: (0, _utilities.mapFlowType)(column.databaseType, column.values) + (column.nullable ? ' | null' : ''),
           typeName: formatTypeName(column.tableName)
         };
       });
@@ -97,7 +97,9 @@ const handler = exports.handler = (() => {
       unnormalizedColumns = unnormalizedColumns.concat((yield (0, _queries.getDatabaseMaterializedViewColumns)(connection)));
     }
 
-    const normalizedColumns = (0, _utilities.normalizeColumns)(unnormalizedColumns);
+    const userDefinedEnums = yield (0, _queries.getUserDefinedEnums)(connection);
+
+    const normalizedColumns = (0, _utilities.normalizeColumns)(unnormalizedColumns, userDefinedEnums);
 
     const properties = createProperties(normalizedColumns);
 

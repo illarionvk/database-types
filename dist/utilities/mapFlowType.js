@@ -8,9 +8,14 @@ var _factories = require('../factories');
 
 const debug = (0, _factories.createDebug)('mapFlowType');
 
-exports.default = databaseTypeName => {
-  if (databaseTypeName === 'json') {
-    return 'Object';
+exports.default = (databaseTypeName, values) => {
+
+  if (values != null) {
+    return values.toString();
+  }
+
+  if (databaseTypeName === 'json' || databaseTypeName === 'jsonb') {
+    return '{||}';
   }
 
   if (databaseTypeName === 'udt_citext') {
@@ -29,8 +34,12 @@ exports.default = databaseTypeName => {
     return 'number';
   }
 
+  if (databaseTypeName === 'numeric') {
+    return 'number';
+  }
+
   debug('unknown type', databaseTypeName);
 
-  return 'any';
+  return '*';
 };
 //# sourceMappingURL=mapFlowType.js.map

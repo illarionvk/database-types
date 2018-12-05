@@ -4,17 +4,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = unnormalizedColumns => {
+exports.default = (unnormalizedColumns, userDefinedEnums) => {
   const normalizedColumns = unnormalizedColumns.map(column => {
     const valueIsNullable = column.isNullable === 'YES';
+
+    const Enum = userDefinedEnums.find(item => {
+      return column.dataType === 'USER-DEFINED' && column.udtName === item.name;
+    });
 
     const databaseType = column.dataType === 'USER-DEFINED' ? 'udt_' + column.udtName : column.dataType;
 
     return {
-      databaseType,
       columnName: column.columnName,
+      databaseType: databaseType,
+      description: Enum ? Enum.description || null : null,
       nullable: valueIsNullable,
-      tableName: column.tableName
+      tableName: column.tableName,
+      values: Enum ? Enum.values || null : null
     };
   });
 
